@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Automação Industrial</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold text-center mb-8">Dashboard de Automação Industrial</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl mb-4">Temperatura da Máquina (°C)</h2>
+                <canvas id="tempChart"></canvas>
+            </div>
+
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl mb-4">Pressão (bar)</h2>
+                <canvas id="pressureChart"></canvas>
+            </div>
+
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl mb-4">Eficiência Operacional (%)</h2>
+                <canvas id="efficiencyChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tempCtx = document.getElementById('tempChart').getContext('2d');
+        const pressureCtx = document.getElementById('pressureChart').getContext('2d');
+        const efficiencyCtx = document.getElementById('efficiencyChart').getContext('2d');
+
+        const tempChart = new Chart(tempCtx, {
+            type: 'line',
+            data: {
+                labels: ['00h', '02h', '04h', '06h', '08h', '10h', '12h', '14h', '16h', '18h', '20h', '22h'],
+                datasets: [{
+                    label: 'Temperatura',
+                    data: [70, 72, 75, 74, 78, 80, 77, 76, 79, 73, 71, 70],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        const pressureChart = new Chart(pressureCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Setor A', 'Setor B', 'Setor C', 'Setor D'],
+                datasets: [{
+                    label: 'Pressão',
+                    data: [3.2, 4.0, 3.6, 3.8],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        const efficiencyChart = new Chart(efficiencyCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Máquina 1', 'Máquina 2', 'Máquina 3'],
+                datasets: [{
+                    label: 'Eficiência',
+                    data: [85, 90, 78],
+                    backgroundColor: [
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+</body>
+</html>
